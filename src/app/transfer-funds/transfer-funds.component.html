@@ -1,0 +1,86 @@
+<div class="alert alert-primary alert-dismissible fade show" role="alert" *ngIf="message">
+  {{ message }}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="jumbotron">
+        <div class="offset-md-4">
+          <h3>Transfer Funds</h3>
+          <form #transferFundsForm='ngForm' (ngSubmit)='transferFundsForm.valid ' novalidate >
+
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="receiverName">Receiver Name<span class="required">*</span></label>
+                <input type="text" required [ngClass]="{'is-invalid': receiverName.invalid && receiverName.touched}" minlength="3-10" pattern="[a-zA-Z ]*"
+                 name="receiverName" id="receiverName" #receiverName='ngModel' ngModel   class="form-control">
+    
+               <div *ngIf="receiverName.invalid &&(receiverName.dirty ||receiverName.touched)" class="invalid-feedback">
+                  <div *ngIf="receiverName.errors.required">receiver name is mandatory</div>
+                  <div *ngIf="receiverName.errors.minlength">receiver name can contain minimum 3 characters and maximum 10 characters</div>
+                  <div *ngIf="receiverName.errors.pattern"> receiver name takes alphabets only </div>
+               </div>
+              </div>
+            </div>
+
+              <div class="form-row">
+                <div class="form-group col-md-4">
+                  <label for="accountNumber">Account Number<span class="required">*</span></label>
+                  <input type="text" required [class.is-invalid]="accountNumber.invalid && accountNumber.touched" pattern="[0-9]{16}"
+                  name="accountNumber" id="accountNumber"  #accountNumber='ngModel' ngModel class="form-control">
+        
+                  <div *ngIf="accountNumber.invalid &&(accountNumber.dirty || accountNumber.touched)" class="invalid-feedback">
+                    <div *ngIf="accountNumber.errors.required">account number is mandatory</div>
+                    <div *ngIf="accountNumber.errors.pattern">account number should be 16 digits only</div>
+                 </div>
+              </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group col-md-4">
+                  <label for="amount">Enter Amount (in INR)<span class="required">*</span></label>
+                  <input type="text" name="amount" id="amount" [ngClass]="{'is-invalid': amount.invalid && amount.touched}"
+                  pattern="([1-8][0-9]{3}|9[0-8][0-9]{2}|99[0-8][0-9]|999[0-9]|[1-4][0-9]{4}|50000)"
+                   #amount='ngModel' ngModel class="form-control" required >
+          
+                  <div *ngIf="amount.invalid &&(amount.dirty ||amount.touched)" class="invalid-feedback">
+                    <div *ngIf="amount.errors.required">enter amount</div>
+                    <div *ngIf="amount.errors.pattern">you can transfer funds of minimum 1000 to maximum 50000 </div>
+                   
+                   </div>
+                  </div>
+              </div>
+              
+          <div class="form-row">
+            <div class="col-md-4">
+            <label for="pin">Pin<span class="required">*</span></label>
+            <div class="input-group mb-3">
+                 <input [type]="passwordType" name="pin" id="pin" pattern="[0-9]{4}" 
+                 required [class.is-invalid]="pin.invalid && pin.touched" #pin='ngModel' ngModel class="form-control">
+      
+                 <div class="input-group-append">
+                  <span class="input-group-text" (click)='showPassword()'>
+                    <i [class]="iconClass" aria-hidden="true"></i>
+                  </span>
+               </div>
+        
+              <div *ngIf="pin.invalid &&(pin.dirty || pin.touched)" class="invalid-feedback">
+              <div *ngIf="pin.errors.required">pin is mandatory</div>
+              <div *ngIf="pin.errors.pattern">pin must be 4 digits only  </div>
+            </div>
+          </div>
+          </div>
+        </div>
+
+          
+              
+                  <div class="row col-md-7">
+                  <button [disabled]="!transferFundsForm.form.valid"  style="margin:5px" type="submit" class="btn btn-outline-success" (click)="transferFunds(transferFundsForm)" >Submit</button>
+                  <button type="reset"   style="margin:5px" class="btn btn-outline-danger">Cancel</button>
+                  </div>
+
+               
+             </form>
+        </div>
+    </div>

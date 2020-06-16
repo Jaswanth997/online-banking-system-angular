@@ -1,0 +1,80 @@
+<div class="alert alert-primary alert-dismissible fade show" role="alert" *ngIf="message">
+  {{ message }}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="message1">
+  <strong>{{ message }}</strong>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="jumbotron">
+<div class="container">
+  <div class="row" >
+    
+    <div class="col-md-4 offset-md-4">
+      <h3>Atm Simulator</h3>
+    <form #atmSimulatorForm ='ngForm' (ngSubmit)="atmSimulatorForm.valid " novalidate>
+      
+      
+      <div class="form-group">
+        <label for="amount">Enter Amount (in INR)</label>
+        <input type="text" name="amount" id="amount" [ngClass]="{'is-invalid': amount.invalid && amount.touched}"
+        pattern="([1-8][0-9]{2}|9[0-8][0-9]|99[0-9]|[1-8][0-9]{3}|9[0-8][0-9]{2}|99[0-8][0-9]|999[0-9]|1[0-9]{4}|2[0-4][0-9]{3}|25000)"
+         #amount='ngModel' ngModel class="form-control" required >
+
+        <div *ngIf="amount.invalid &&(amount.dirty ||amount.touched)" class="invalid-feedback">
+          <div *ngIf="amount.errors.required">enter amount</div>
+          <div *ngIf="amount.errors.pattern">you can withdraw from atm of minimum of 100 and maximum of 25000 only </div>
+         
+         </div>
+        </div>
+
+        
+        <div class="form-group">
+          <label>Card</label>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" required [ngClass]="{'is-invalid': card.invalid && card.touched}"
+          name="card" id="card" #card='ngModel' ngModel value="debit">
+          <label class="form-check-label" for="card">Debit</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio"  required [ngClass]="{'is-invalid': card.invalid && card.touched} "
+          name="card" #card='ngModel' ngModel   value="credit">
+          <label class="form-check-label" for="card">Credit</label>
+        </div>
+      </div>
+
+      <label for="pin">Enter Pin (4 digits)<span class="required">*</span></label>
+        <div class="input-group mb-3">
+        <input [type]="passwordType" name="pin" id="pin" pattern="[0-9]{4}" [ngClass]="{'is-invalid': pin.invalid && pin.touched}"
+        #pin='ngModel' ngModel class="form-control" required >
+
+        <div class="input-group-append">
+          <span class="input-group-text" (click)='showPassword()'>
+            <i [class]="iconClass" aria-hidden="true"></i>
+          </span>
+       </div>
+
+        <div *ngIf="pin.invalid &&(pin.dirty ||pin.touched)" class="invalid-feedback">
+          <div *ngIf="pin.errors.required">enter pin</div>
+          <div *ngIf="pin.errors.pattern">pin must be 4 digits only </div>
+
+         </div>
+        </div>
+      
+
+          <div class="row col-md-7">
+            <button [disabled]='!atmSimulatorForm.form.valid' style="margin:5px" type="submit" class="btn btn-outline-success"  (click)="postAtmDetails(atmSimulatorForm)" >Submit</button>
+            <button type="reset" style="margin:5px" class="btn btn-outline-danger">Cancel</button>
+          </div>
+    </form>
+  </div>
+</div>
+</div>
+</div>
+

@@ -1,0 +1,84 @@
+<div class="table-responsive">
+
+  <div class="form-row">
+    <h5 class="float-left col-md-1">Sort by</h5>
+    <div class="form-group">
+      <select class="form-control" [(ngModel)]="fieldName" (change)="getSortedData()">
+        <option value="customerId">Customer Id</option>
+        <option value="firstName">Name</option>
+        <option value="dateOfBirth">Date Of Birth</option>
+        <option value="emailId">Email Id</option>
+        <option value="phoneNumber">Phone Number</option>
+        <option value="bankBranch">Bank Branch</option>
+        <option value="accountNumber">Account Number</option>
+      </select>
+    </div>
+ 
+    <h5 class="float-left ">Search by</h5>
+    <div class="form-group">
+      <select class="form-control"  [(ngModel)]="searchBy" (change)="getSortedData()">
+        <option value="accountNumber">Account Number</option>
+        <option value="firstName">Name</option>
+        <option value="emailId">Email Id</option>
+        <option value="phoneNumber">Phone Number</option>
+        <option value="bankBranch">Bank Branch</option>
+      </select>
+    </div>
+    
+    <div class="form-group col-md-4">
+      <input type="text"
+  class="form-control"  placeholder="Search here.." [(ngModel)]="searchValue" >
+    </div>
+</div>
+
+
+  <table class="table table-hover table-bordered table-condensed">
+  <caption>List of Customers</caption>
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Customer Id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Gender</th>
+      <th scope="col">Date Of Birth</th>
+      <th scope="col">Aadhar Number</th>
+      <th scope="col">Email Id</th>
+      <th scope="col">Phone Number</th>
+      <th scope="col">Address</th>
+      <th scope="col">Bank Branch</th>
+      <th scope="col">Account Number</th>
+      <th scope="col">Opening Balance(INR)</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let customer of customers | customerSearch: searchValue: searchBy">
+      <td>{{customer.customerId}}</td>
+      <td>{{customer.firstName}} {{customer.lastName}}</td>
+      <td>{{customer.gender}}</td>
+      <td>{{customer.dateOfBirth}}</td>
+      <td>{{customer.aadharNumber}}</td>
+      <td>{{customer.emailId}}</td>
+      <td>{{customer.phoneNumber}}</td>
+      <td>{{customer.address}}</td>
+      <td>{{customer.bankBranch}}</td>
+      <td>{{customer.accountNumber}}</td>
+      <td>{{customer.openingBalance}}</td>
+     
+      <td>
+    
+      <button type="submit" class="btn btn-outline-primary" (click)="updateCustomer(customer)">Update</button>  
+      
+     </td>
+    </tr>
+  </tbody>
+</table>
+<mat-paginator [length]="totalItems"
+              [pageSize]="itemsPerPage"
+              [pageSizeOptions]="[1, 2, 3, 4, 5, 10, 25, 100]"
+              (page)="getNextPageItems($event)">
+</mat-paginator>
+</div>
+
+
+
+

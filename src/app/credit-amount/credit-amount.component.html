@@ -1,0 +1,33 @@
+<div class="alert alert-primary alert-dismissible fade show" role="alert" *ngIf="message">
+  {{ message }}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="jumbotron">
+  <div class="offset-md-4">
+    <h3>Deposit Amount</h3>
+
+    <form #creditAmountForm="ngForm" (ngSubmit)="creditAmountForm.valid" novalidate>
+      <div class="row">
+       <div class="form-group col-md-3">
+        <label for="amount">Enter Amount (in INR)</label>
+        <input type="text" name="amount" id="amount" [ngClass]="{'is-invalid': amount.invalid && amount.touched}"
+        pattern="([1-8][0-9]{3}|9[0-8][0-9]{2}|99[0-8][0-9]|999[0-9]|[1-4][0-9]{4}|50000)"
+         #amount='ngModel' ngModel class="form-control" required >
+
+        <div *ngIf="amount.invalid &&(amount.dirty ||amount.touched)" class="invalid-feedback">
+          <div *ngIf="amount.errors.required">enter amount</div>
+          <div *ngIf="amount.errors.pattern">Maximum of 50000 and minimum of 1000 only you can deposit</div>
+         </div>
+        </div>
+      </div>
+
+            <div class="row col-md-7">
+              <button [disabled]='!creditAmountForm.form.valid'  style="margin:5px" type="submit" class="btn btn-outline-success" (click)="creditAmount(creditAmountForm)" >Submit</button>
+              <button type="reset"  style="margin:5px" class="btn btn-outline-danger">Cancel</button>
+            </div>
+    </form>
+  </div>
+</div>

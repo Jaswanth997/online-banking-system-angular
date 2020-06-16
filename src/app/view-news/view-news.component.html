@@ -1,0 +1,19 @@
+
+<div class="px-3 py-3 col-md">
+
+</div> 
+  <div class="col-md-3 mt-5 float-left" *ngFor="let detail of details">
+    <div class="card">
+      <div class="card-header" style="background-color: lightgray">
+        <h5> <i class="fa fa-newspaper-o" aria-hidden="true"></i> Bank News </h5>
+      </div>
+      <div class="card-body bg-light" style="height:260px;">
+        <br>
+         <b>HeadLine </b>
+        <p >{{detail.headline}}</p>
+        <br>
+         <b>Details</b>
+        <p>{{detail.news}}</p>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,29 @@
+<div class="jumbotron">
+<div class="container">
+    <div class="row">
+      <div class="col-md-6 img">
+        <img *ngIf="users.gender ==='Male'" src="https://www.w3schools.com/w3css/img_avatar3.png" alt="Avatar"  width="350px" class="avatar" height="350px"/>
+        <img *ngIf="users.gender ==='Female'" src="https://www.w3schools.com/howto/img_avatar2.png"alt="Avatar"  width="350px" class="avatar" height="350px"/>
+      
+      </div>
+  
+      <div class="col-md-6 details">
+        <blockquote>
+          <h5>{{users.firstName}} {{users.lastName}}</h5>
+          <h5>Balance :{{users.openingBalance}}</h5>
+        </blockquote>
+        <p>
+          Email Id: {{users.emailId}} <br>
+          Date of Birth: {{users.dateOfBirth}} <br>
+          Branch :  {{users.bankBranch}}<br>
+          Account Number: {{users.accountNumber}}<br>
+          Phone Number : {{users.phoneNumber}}<br>
+          Aadhar Number : {{users.aadharNumber}}<br>
+          Address:{{users.address}}
+        </p>
+  
+  
+      </div>
+    </div>
+  </div>
+</div>

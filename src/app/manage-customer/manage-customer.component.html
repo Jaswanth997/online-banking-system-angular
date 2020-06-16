@@ -1,0 +1,172 @@
+<div class="jumbotron">
+  <div class=" offset-md-3">
+       <h3>Manage Customer</h3>
+  
+      <form #manageCustomerForm="ngForm" (ngSubmit)="manageCustomerForm.valid" novalidate>
+
+        
+           <input type="hidden"  name="customerId" id="customerId" 
+           #customerId='ngModel' [(ngModel)]='customerToUpdate.customerId' class="form-control" >
+          
+
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="firstName">First Name</label>
+              <input type="text" required [ngClass]="{'is-invalid': firstName.invalid && firstName.touched}" minlength="3-10" pattern="[a-zA-Z ]*"
+               name="firstName" id="firstName" #firstName='ngModel'  [(ngModel)]='customerToUpdate.firstName'   class="form-control">
+  
+             <div *ngIf="firstName.invalid &&(firstName.dirty ||firstName.touched)" class="invalid-feedback">
+                <div *ngIf="firstName.errors.required">firstname is required</div>
+                <div *ngIf="firstName.errors.minlength">firstname can contain minimum 3 characters and maximum 10 characters</div>
+                <div *ngIf="firstName.errors.pattern"> firstname takes alphabets only </div>
+             </div>
+            </div>
+            
+            <div class="form-group col-md-4">
+              <label for="lastName">Last Name</label>
+              <input type="text" required [class.is-invalid]="lastName.invalid && lastName.touched" minlength="1-10" pattern="[a-zA-Z ]*"
+              name="lastName" id="lastName" #lastName='ngModel' [(ngModel)]='customerToUpdate.lastName'  class="form-control" >
+  
+              <div *ngIf="lastName.invalid &&(lastName.dirty ||lastName.touched)" class="invalid-feedback">
+                <div *ngIf="lastName.errors.required">lastname is required</div>
+                <div *ngIf="lastName.errors.minlength">lastname can contain minimum 1 character and maximum 10 characters</div>
+                <div *ngIf="lastName.errors.pattern">lastname takes alphabets only</div>
+             </div>
+            </div>
+          </div>
+         
+          <div class="form-group">
+            <label>Gender </label>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" required [class.is-invalid]="gender.invalid && gender.touched"
+            name="gender" id="gender" #gender='ngModel' [(ngModel)]='customerToUpdate.gender' value="male">
+            <label class="form-check-label" for="gender">Male</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" required [class.is-invalid]="gender.invalid && gender.touched" 
+            name="gender" #gender='ngModel' [(ngModel)]='customerToUpdate.gender'  value="female">
+            <label class="form-check-label" for="gender">Female</label>
+          </div>
+        </div>
+         
+        <div class="form-row">
+         <div class="form-group col-md-4">
+            <label for="dateOfBirth">Date Of Birth</label>
+            <input type="date" class="form-control" required [class.is-invalid]="dateOfBirth.invalid && dateOfBirth.touched" 
+            name="dateOfBirth" id="dateOfBirth" #dateOfBirth='ngModel' [(ngModel)]='customerToUpdate.dateOfBirth' >
+  
+            <div *ngIf="dateOfBirth.invalid &&(dateOfBirth.dirty ||dateOfBirth.touched)" class="invalid-feedback">
+              <div *ngIf="dateOfBirth.errors.required">date of birth is required</div>
+             </div>
+          </div>
+      
+          <div class="form-group col-md-4">
+          <label for="aadharNumber">Aadhar Number</label>
+          <input type="text" class="form-control"  required [class.is-invalid]="aadharNumber.invalid && aadharNumber.touched" 
+          pattern="[0-9]{12}" name="aadharNumber" id="aadharNumber" #aadharNumber='ngModel' [(ngModel)]='customerToUpdate.aadharNumber' readonly >
+  
+          <div *ngIf="aadharNumber.invalid &&(aadharNumber.dirty || aadharNumber.touched)" class="invalid-feedback">
+            <div *ngIf="aadharNumber.errors.required">aadhar number is required</div>
+            <div *ngIf="aadharNumber.errors.pattern">aadhar number should be 12 digits</div>
+  
+          </div>
+        </div>
+      </div>
+    
+     <div class="form-row">
+      <div class="form-group col-md-4">                                 <!-- pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"-->
+        <label for="emailId">Email Id </label>                     
+        <input type="email" name="emailId" id="emailId" maxlength="30"   pattern="^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$"
+        required [class.is-invalid]="emailId.invalid && emailId.touched" #emailId='ngModel' [(ngModel)]='customerToUpdate.emailId' class="form-control" placeholder="ex: user@gmail.com">
+        
+        <div *ngIf="emailId.invalid &&(emailId.dirty ||emailId.touched)" class="invalid-feedback">
+          <div *ngIf="emailId.errors.required">email is required</div>
+          <div *ngIf="emailId.errors.pattern">enter a valid email  </div>
+        </div>
+      </div>
+  
+      <div class="form-group col-md-4">
+        <label for="phoneNumber">Phone Number</label>
+        <input type="text" name="phoneNumber"  id="phoneNumber" #phoneNumber='ngModel' [(ngModel)]='customerToUpdate.phoneNumber' required 
+        pattern="^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[6789]\d{9}$" class="form-control" 
+        [class.is-invalid]="phoneNumber.invalid && phoneNumber.touched" >
+  
+        <div *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)" class="invalid-feedback">
+          <div *ngIf="phoneNumber.errors.required">phone number is required</div> 
+          <div *ngIf="phoneNumber.errors.pattern">phone number should be 10 digits</div> 
+        </div>
+      </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <label for="address">Address</label>
+          <textarea  rows="5"  class="form-control"  
+         name="address" id="address"  #address='ngModel' [(ngModel)]="customerToUpdate.address" required>
+         </textarea>
+    
+         <div *ngIf="address.invalid &&(address.dirty || address.touched)" class="invalid-feedback">
+          <div *ngIf="address.errors.required">address is required</div>
+        </div>
+       </div>
+      </div>
+       
+           <div class="form-row">
+           <div class="form-group col-md-4">
+            <label for="bankBranch">Bank Branch</label>
+            <select name="bankBranch" id="bankBranch"  required [class.is-invalid]="bankBranch.invalid && bankBranch.touched" 
+            #bankBranch='ngModel'  [(ngModel)]='customerToUpdate.bankBranch' class="form-control">
+            <option disabled>Choose Bank Branch</option>
+              <option>Tirupati</option>
+              <option>Visakhapatnam</option>
+              <option>Vijayawada</option>
+              <option>Hyderabad</option>
+              <option>Secunderabad</option>
+              <option>Kurnool</option>
+              <option>Ranchi</option>
+              <option>Bangalore</option>
+              <option>Chennai</option>
+              <option>Delhi</option>
+              
+              
+            </select>
+  
+            <div *ngIf="bankBranch.invalid &&(bankBranch.dirty || bankBranch.touched)" class="invalid-feedback">
+              <div *ngIf="bankBranch.errors.required">bank branch is required</div>
+            </div>
+          </div>
+
+          <div class="form-group col-md-4">
+            <label for="openingBalance"> Opening Balance</label>
+            <input type="text"  required [class.is-invalid]="openingBalance.invalid && openingBalance.touched"
+            name="openingBalance" id="openingBalance" #openingBalance='ngModel'  [(ngModel)]='customerToUpdate.openingBalance' class="form-control" readonly >
+  
+            <div *ngIf="openingBalance.invalid &&(openingBalance.dirty || openingBalance.touched)" class="invalid-feedback">
+              <div *ngIf="openingBalance.errors.required">opening balance is required</div>
+           </div>
+         </div>
+  
+          
+        </div>
+
+        
+    <input type="hidden" name="accountNumber" id="accountNumber"  #accountNumber='ngModel' [(ngModel)]='customerToUpdate.accountNumber'  class="form-control" >
+
+     <input type="hidden" name="pin"  id="pin"  #pin='ngModel' [(ngModel)]='customerToUpdate.pin' class="form-control" >
+  
+    <input type="hidden" name="password" id="password"  #password='ngModel' [(ngModel)]='customerToUpdate.password' class="form-control">
+        
+    <input type="hidden" name="role" id="role" #status='ngModel' [(ngModel)]="defaultValue">
+
+    
+          <div class="d-flex flex-column">
+            <div class="p-2">
+              <button [disabled]="!manageCustomerForm.form.valid" type="submit" class="btn btn-outline-success" (click)="updateCustomer(manageCustomerForm)" >
+                Update Customer
+             </button>
+            </div>
+          </div>
+  
+      </form>
+    </div>
+  </div>

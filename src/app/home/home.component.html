@@ -1,0 +1,71 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">
+    <img src="https://cdn.logojoy.com/wp-content/uploads/2018/05/30160248/8_big15.png" width="50" height="50" class="d-inline-block align-top" alt="">
+    <b>Welcome to Sun Bank!</b>
+  </a>
+
+  <ul class="navbar-nav ml-auto"> 
+    <li class="nav-item " *ngIf='!userService.isLogged()'>
+      <a class="nav-link" data-toggle="tab" routerLink="/login">
+         <i class="fa fa-arrow-right" aria-hidden="true">Login </i>  
+      </a>
+    </li>
+    <li class="nav-item " *ngIf='userService.isUser()'>
+      <a class="nav-link" data-toggle="tab" routerLink="/profile">
+       <i class="fa fa-user" aria-hidden="true">MyProfile </i>  
+      </a>
+    </li>
+    <!-- <li class="nav-item " *ngIf='userService.isLogged()'>
+       <i>Welcome {{data.firstName}} {{data.lastName}} </i>  
+    </li> -->
+    <li class="nav-item" *ngIf='userService.isLogged()'>
+      <a class="nav-link" style="cursor: pointer;" (click)="userService.logout()">
+        <i class="fa fa-arrow-left" aria-hidden="true">Logout</i>  
+      </a>
+    </li>
+</ul> 
+</nav>
+
+  <nav class="navbar navbar-expand-lg navbar-light" >
+    <ul class="nav nav-tabs">
+      <li class="nav-item " *ngIf='userService.isAdmin()'>
+        <a class="nav-link"  data-toggle="tab" routerLink="/customer">Customers</a>
+      </li>
+      <li class="nav-item " *ngIf='userService.isAdmin()'>
+        <a class="nav-link"  data-toggle="tab" routerLink="/post-news">Post News  <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item " *ngIf='userService.isUser()'>
+        <a class="nav-link "  data-toggle="tab" routerLink="/atm-simulator">Atm Simulator <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item " *ngIf='userService.isUser()'>
+        <a class="nav-link "  data-toggle="tab" routerLink="/beneficiaries">Beneficiaries <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item" *ngIf='userService.isUser()'>
+        <a class="nav-link "  data-toggle="tab" routerLink="/my-beneficiaries">MyBeneficiaries  <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item " *ngIf='userService.isUser()'>
+        <a class="nav-link "  data-toggle="tab" routerLink="/transfer-funds">Transfer Funds  <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item " *ngIf='userService.isUser()'>
+        <a class="nav-link "  data-toggle="tab" routerLink="/credit-amount">Deposit Amount <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item" *ngIf='userService.isUser()'>
+        <a class="nav-link "  data-toggle="tab" routerLink="/my-transactions">MyTransactions <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item" *ngIf='userService.isAdmin()'>
+        <a class="nav-link "  data-toggle="tab" routerLink="/transactions-list">List Of Transactions  <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item" *ngIf='userService.isUser()'>
+        <a class="nav-link "  data-toggle="tab" routerLink="/request">Request  <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item" *ngIf='userService.isAdmin()'>
+        <a class="nav-link "  data-toggle="tab" routerLink="/requests">Requests <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item" *ngIf='userService.isUser()'>
+        <a class="nav-link "  data-toggle="tab" routerLink="/track-your-status">Track your Request <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item " *ngIf='userService.isUser()'>
+        <a class="nav-link"  data-toggle="tab" routerLink="/view-news">View News  <span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+</nav>

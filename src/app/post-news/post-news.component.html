@@ -1,0 +1,48 @@
+<div class="alert alert-primary alert-dismissible fade show" role="alert" *ngIf="message">
+  {{ message }}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="jumbotron">
+<div class="col-md-4 offset-md-4 mt-4">
+
+  <h1>Post news</h1>
+
+  <form #postNewsForm='ngForm' (ngSubmit)="postNewsForm.valid " novalidate>
+
+    <div class="form-group">
+      <label for="headline">News Headline<span class="required">*</span></label>
+      <input type="text" required [ngClass]="{'is-invalid': headline.invalid && headline.touched}"
+       name="headline" id="headline" #headline='ngModel' ngModel class="form-control">
+
+       <div *ngIf="headline.invalid &&(headline.dirty || headline.touched)" class="invalid-feedback">
+        <div *ngIf="headline.errors.required">Give some news headline</div>
+       </div>
+    </div>
+
+    <div class="form-group ">
+        <label for="news">News<span class="required">*</span></label>
+      <textarea rows="5" required [ngClass]="{'is-invalid': news.invalid && news.touched}"
+      name="news" id="news" #news='ngModel' ngModel class="form-control" >Post news</textarea>
+      
+      <div *ngIf="news.invalid &&(news.dirty ||news.touched)" class="invalid-feedback">
+        <div *ngIf="news.errors.required">write some news</div>
+
+       </div>
+      </div>
+
+
+      <div class="flex-container">
+        <div class="d-flex flex-column">
+          <div class="p-2">
+            <button [disabled]="!postNewsForm.form.valid" type="submit" class="btn btn-outline-info" (click)="postNews(postNewsForm)">Post</button>
+          </div>
+         
+       
+      </div>
+    </div>
+    
+   </form>
+</div>
+</div>

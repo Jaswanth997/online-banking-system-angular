@@ -1,0 +1,242 @@
+<div class="alert alert-primary alert-dismissible fade show" role="alert" *ngIf="message">
+  {{ message }}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="jumbotron">
+<div class=" offset-md-3">
+     <h3>Add Customer/Admin</h3>
+
+    <form #addCustomerForm="ngForm">
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="firstName">First Name</label>
+            <input type="text" required [ngClass]="{'is-invalid': firstName.invalid && firstName.touched}" minlength="3-10" pattern="[a-zA-Z ]*"
+             name="firstName" id="firstName" #firstName='ngModel' ngModel   class="form-control">
+
+           <div *ngIf="firstName.invalid &&(firstName.dirty ||firstName.touched)" class="invalid-feedback">
+              <div *ngIf="firstName.errors.required">firstname is mandatory</div>
+              <div *ngIf="firstName.errors.minlength">firstname can contain minimum 3 characters and maximum 10 characters</div>
+              <div *ngIf="firstName.errors.pattern"> firstname takes alphabets only </div>
+           </div>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="lastName">Last Name</label>
+            <input type="text" required [class.is-invalid]="lastName.invalid && lastName.touched" minlength="1-10" pattern="[a-zA-Z ]*"
+            name="lastName" id="lastName" #lastName='ngModel' ngModel  class="form-control" >
+
+            <div *ngIf="lastName.invalid &&(lastName.dirty ||lastName.touched)" class="invalid-feedback">
+              <div *ngIf="lastName.errors.required">lastname is mandatory</div>
+              <div *ngIf="lastName.errors.minlength">lastname can contain minimum 1 character and maximum 10 characters</div>
+              <div *ngIf="lastName.errors.pattern">lastname takes alphabets only</div>
+           </div>
+          </div>
+        </div>
+       
+        <div class="form-group">
+          <label>Gender </label>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" required [class.is-invalid]="gender.invalid && gender.touched"
+          name="gender" id="gender" #gender='ngModel' ngModel value="Male">
+          <label class="form-check-label" for="gender">Male</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" required [class.is-invalid]="gender.invalid && gender.touched" 
+          name="gender" #gender='ngModel' ngModel  value="Female">
+          <label class="form-check-label" for="gender">Female</label>
+        </div>
+      </div>
+       
+      <div class="form-row">
+       <div class="form-group col-md-4">
+          <label for="dateOfBirth"> <i class="fa fa-calendar" aria-hidden="true">Date Of Birth</i></label>
+          <input type="date" class="form-control" required [class.is-invalid]="dateOfBirth.invalid && dateOfBirth.touched" 
+          name="dateOfBirth" id="dateOfBirth" #dateOfBirth='ngModel' ngModel >
+
+          <div *ngIf="dateOfBirth.invalid &&(dateOfBirth.dirty ||dateOfBirth.touched)" class="invalid-feedback">
+            <div *ngIf="dateOfBirth.errors.required">date of birth is required</div>
+           </div>
+        </div>
+
+        <div class="form-group col-md-4">
+        <label for="aadharNumber">Aadhar Number<span class="required">*</span></label>
+        <input type="text" class="form-control"  required [class.is-invalid]="aadharNumber.invalid && aadharNumber.touched" 
+        pattern="[0-9]{12}" name="aadharNumber" id="aadharNumber" #aadharNumber='ngModel' ngModel >
+
+        <div *ngIf="aadharNumber.invalid &&(aadharNumber.dirty || aadharNumber.touched)" class="invalid-feedback">
+          <div *ngIf="aadharNumber.errors.required">aadhar number is mandatory</div>
+          <div *ngIf="aadharNumber.errors.pattern">aadhar number should be 12 digits</div>
+
+        </div>
+      </div>
+    </div>
+  
+   <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="emailId">Email Id<span class="required">*</span></label>
+      <input type="email" name="emailId" id="emailId" maxlength="30" pattern="^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$"
+      required [class.is-invalid]="emailId.invalid && emailId.touched" #emailId='ngModel' ngModel class="form-control" placeholder="ex: abc@gmail.com">
+      
+      <div *ngIf="emailId.invalid &&(emailId.dirty ||emailId.touched)" class="invalid-feedback">
+        <div *ngIf="emailId.errors.required">email is mandatory</div>
+        <div *ngIf="emailId.errors.pattern">enter a valid email  </div>
+       </div>
+    </div>
+
+    <div class="form-group col-md-4">
+      <label for="phoneNumber">Phone Number<span class="required">*</span></label>
+      <input type="text" name="phoneNumber"  id="phoneNumber" #phoneNumber='ngModel' ngModel required pattern="^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[6789]\d{9}$" class="form-control" 
+      [class.is-invalid]="phoneNumber.invalid && phoneNumber.touched" >
+
+      <div *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)" class="invalid-feedback">
+        <div *ngIf="phoneNumber.errors.required">phone number is mandatory</div> 
+        <div *ngIf="phoneNumber.errors.pattern">phone number should be 10 digits  </div> 
+        </div>
+    </div>
+    </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="address">Address<span class="required">*</span></label>
+      <textarea  rows="5"  class="form-control"  
+     name="address" id="address"  #address='ngModel' ngModel required>
+     </textarea>
+
+     <div *ngIf="address.invalid &&(address.dirty || address.touched)" class="invalid-feedback">
+      <div *ngIf="address.errors.required">address is required</div>
+    </div>
+   </div>
+  </div>
+
+    
+      <div class="form-row">
+       <div class="form-group col-md-4">
+          <label for="bankBranch">Bank Branch<span class="required">*</span></label>
+          <select name="bankBranch" id="bankBranch"  required [class.is-invalid]="bankBranch.invalid && bankBranch.touched" 
+          #bankBranch='ngModel' ngModel class="form-control">
+          <option disabled>Choose Bank Branch</option>
+            <option>Tirupati</option>
+            <option>Visakhapatnam</option>
+            <option>Vijayawada</option>
+            <option>Hyderabad</option>
+            <option>Secunderabad</option>
+            <option>Kurnool</option>
+            <option>Bangalore</option>
+            <option>Chennai</option>
+            <option>Ranchi</option>
+            <option>Delhi</option>
+          </select>
+
+          <div *ngIf="bankBranch.invalid &&(bankBranch.dirty || bankBranch.touched)" class="invalid-feedback">
+            <div *ngIf="bankBranch.errors.required">bank branch is required</div>
+          </div>
+        </div>
+
+        <div class="form-group col-md-4">
+          <label for="openingBalance"> Opening Balance</label>
+          <input type="text"  required [class.is-invalid]="openingBalance.invalid && openingBalance.touched" 
+          pattern="([1-8][0-9]{3}|9[0-8][0-9]{2}|99[0-8][0-9]|999[0-9]|[1-4][0-9]{4}|50000)"
+          name="openingBalance" id="openingBalance" #openingBalance='ngModel' ngModel class="form-control" >
+
+          <div *ngIf="openingBalance.invalid &&(openingBalance.dirty || openingBalance.touched)" class="invalid-feedback">
+            <div *ngIf="openingBalance.errors.required">opening balance is required</div>
+            <div *ngIf="openingBalance.errors.pattern">opening balance can have between 1000 to 50000 only</div>
+         </div>
+       </div>
+      </div>
+         
+      <div class="form-row">
+       
+        <div class="form-group col-md-4">
+          <label for="accountNumber"> Account Number<span class="required">*</span></label>
+          <input type="text" required [class.is-invalid]="accountNumber.invalid && accountNumber.touched" pattern="[0-9]{16}"
+          name="accountNumber" id="accountNumber"  #accountNumber='ngModel' ngModel class="form-control">
+
+          <div *ngIf="accountNumber.invalid &&(accountNumber.dirty || accountNumber.touched)" class="invalid-feedback">
+            <div *ngIf="accountNumber.errors.required">account number is required</div>
+            <div *ngIf="accountNumber.errors.pattern">account number should be 16 digits only</div>
+         </div>
+         </div>
+
+         <div class="form-group col-md-4">
+          <label for="role">Role<span class="required">*</span></label>
+          <select name="role" id="role"  required [class.is-invalid]="role.invalid && role.touched" 
+          #role='ngModel' ngModel class="form-control">
+            <option>ROLE_USER</option>
+            <option>ROLE_ADMIN</option>
+          </select>
+
+          <div *ngIf="role.invalid &&(role.dirty || role.touched)" class="invalid-feedback">
+            <div *ngIf="role.errors.required">role is required</div>
+          </div>
+        </div>
+
+      </div>
+         
+        <div class="form-row ">
+          <div class="col-md-4">
+          <label for="password">Password<span class="required">*</span></label>
+          <div class="input-group mb-3">
+            <input [type]="passwordType" name="password" id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+            required [class.is-invalid]="password.invalid && password.touched" #password='ngModel' ngModel class="form-control">
+            <div class="input-group-append">
+              <span class="input-group-text" (click)='showPassword()'>
+                <i [class]="iconClass"></i>
+              </span>
+           </div>
+      
+            <div *ngIf="password.invalid &&(password.dirty ||password.touched)" class="invalid-feedback">
+              <div *ngIf="password.errors.required">password is mandatory</div>
+              <div *ngIf="password.errors.pattern">Use 8 or more characters with a mix of letters, numbers & symbols  </div>
+            </div>
+          </div>
+        </div>
+
+          <div class="col-md-4">
+          <label for="password2">Confirm Password</label>
+          <div class="input-group mb-3">
+            <input [type]="passwordType1" name="password2" id="password2" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+            required [class.is-invalid]="password2.invalid && password2.touched" #password2='ngModel' ngModel class="form-control">
+            <div class="input-group-append">
+              <span class="input-group-text" (click)='showPassword1()'>
+                <i [class]="iconClass1"></i>
+              </span>
+           </div>
+      
+           <div *ngIf="password2.invalid && password2.touched">
+            <small class="invalid-feedback" *ngIf="password2.errors.required">
+              Enter again to confirm password
+            </small>
+            <small class="invalid-feedback" *ngIf="password2.errors.pattern">
+              Use 8 or more characters with a mix of upper and lowercase letters, numbers & symbols
+            </small>
+          </div>      
+        
+
+        <div *ngIf="password2.touched">
+          <div *ngIf="password.value !== password2.value">
+            <small class="invalid-feedback">
+              Password and confirm password doesn't match
+            </small>
+          </div>
+          </div>
+          </div>
+        </div>
+      </div>
+
+  
+    <div class="row col-md-7">
+      <div *ngIf='password.value == password2.value'>
+        <button type="submit" class="btn btn-outline-success" style="margin:5px" (click)="addCustomer(addCustomerForm)" [disabled]='addCustomerForm.invalid'>Add </button>
+      </div>
+
+      <div *ngIf='password.value !== password2.value'>
+        <button type="submit" class="btn btn-outline-success" style="margin:5px"  (click)="addCustomer(addCustomerForm)" disabled>Add </button>
+      </div>
+    </div>
+
+    </form>
+  </div>
+</div>

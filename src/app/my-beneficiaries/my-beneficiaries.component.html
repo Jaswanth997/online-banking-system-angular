@@ -1,0 +1,47 @@
+<div class="form-row">
+  <h5 class="col-md-2">Search by</h5>
+  <div class="form-group">
+    <select class="form-control" [(ngModel)]="searchBy">
+            <option value="beneficiaryId">Beneficiary Id</option>
+            <option value="firstName">First Name</option>
+            <option value="lastName">Last Name</option>
+            <option value="accountNumber">Account Number</option>
+            <option value="emailId">Email Id</option>
+           <option value="phoneNumber">Phone Number</option>
+    </select>
+   </div> 
+
+   <div class="form-group col-md-4">
+    <input type="text"
+class="form-control"  placeholder="Search here.." [(ngModel)]="searchValue" >
+  </div>
+</div> 
+<table class="table table-hover table-bordered table-condensed">
+  <caption>List of Beneficiaries</caption>
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Beneficiary Id</th>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">Account Number</th>
+      <th scope="col">Email Id</th>
+      <th scope="col">Phone Number</th>
+      <th scope="col">Action</th>
+      
+      
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let beneficiary of beneficiaries | beneficiarySearch: searchValue: searchBy" >
+      <td>{{beneficiary.beneficiaryId}}</td>
+      <td>{{beneficiary.firstName}}</td>
+      <td>{{beneficiary.lastName}}</td>
+      <td>{{beneficiary.accountNumber}}</td>
+      <td>{{beneficiary.emailId}}</td>
+      <td>{{beneficiary.phoneNumber}}</td>
+      <td><button type="submit" class="btn btn-outline-danger" (click)="deleteBeneficiary(beneficiary)">Delete</button></td>
+      
+
+    </tr>
+  </tbody>
+</table>

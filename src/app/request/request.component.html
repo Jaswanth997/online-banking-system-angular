@@ -1,0 +1,62 @@
+<div class="alert alert-primary alert-dismissible fade show" role="alert" *ngIf="message">
+  {{ message }}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="jumbotron">
+  <div class="col-md-4 offset-md-4 mt-4">
+    <h3>Request</h3>
+  
+    <form #requestForm='ngForm' (ngSubmit)="requestForm.valid" novalidate>
+      <div class="form-group ">
+        <label for="request">Please select your request <span class="required">*</span></label>
+        <select name="request" [(ngModel)]="selectedOption" (change)="selectOption()" id="request"  required [class.is-invalid]="request.invalid && request.touched" 
+        #request='ngModel' ngModel class="form-control" >
+          <option value="address"> change in communication address</option>
+          <option value="mobile"> change in mobilenumber</option>
+          <option value="cheques"> checkbook</option>
+        </select>
+      </div>
+      
+      <input type="hidden" name="status" id="status" #status='ngModel' [(ngModel)]="defaultValue">
+
+      
+        <div *ngIf="address" class="form-group ">
+          <label for="address">New Address</label>
+          <textarea  rows="5"  class="form-control"  
+         name="address" id="address"  #address='ngModel' ngModel placeholder="enter your new address here...">
+         </textarea>
+       </div>
+      
+
+          <div *ngIf="mobile" class="form-group ">
+            <label for="phoneNumber"> New Phone Number</label>
+            <input type="text" name="phoneNumber"  id="phoneNumber" #phoneNumber='ngModel' ngModel pattern="^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[6789]\d{9}$" class="form-control" 
+            [class.is-invalid]="phoneNumber.invalid" >
+      
+            <div *ngIf="phoneNumber.invalid" class="invalid-feedback">
+              <div *ngIf="phoneNumber.errors.pattern">phone number is not valid</div> 
+              </div>
+          </div>
+
+          <div *ngIf="chequeLeaves" class="form-group">
+            <label for="leaves"> No. of  chequeleaves</label>
+            <input type="text" name="leaves"  id="leaves" #leaves='ngModel' ngModel  class="form-control" >
+          </div>
+
+     
+            <div class="row col-md-7">
+              <button [disabled]='!requestForm.form.valid' style="margin:5px" type="submit" class="btn btn-outline-success" (click)="postRequest(requestForm)" >Submit</button>
+              <button type="reset" style="margin:5px" class="btn btn-outline-danger">Cancel</button>
+            </div>
+         
+         
+      
+        </form>
+  </div>
+  </div>
+  
+  
+   
+  

@@ -1,0 +1,61 @@
+<div class="form-row">
+  <h5 class="float-left col-md-1">Sort By</h5>
+  <div class="form-group">
+    <select class="form-control" [(ngModel)]="fieldName"  (change)="getSortedData()">
+          <option value="transactionId">Transaction Id</option>
+           <option value="credit">Credit </option>
+           <option value="debit">Debit</option>
+           <option value="balance">Balance</option>
+ </select>
+  </div>
+
+  <h5 class="float-left">Search by</h5>
+  <div class="form-group">
+    <select class="form-control" [(ngModel)]="searchBy" (change)="getSortedData()">
+      <option value="transactionId">Transaction Id</option>
+           <option value="credit">Credit </option>
+           <option value="debit">Debit</option>
+           <option value="balance">Balance</option>
+    </select>
+   </div> 
+
+   <div class="form-group col-md-4">
+    <input type="text"
+class="form-control"  placeholder="Search here.." [(ngModel)]="searchValue" >
+  </div>
+</div>
+
+<table class="table table-bordered table-hover table-condensed">
+  <caption>List of Transactions </caption>
+  <thead class="thead-dark">
+   <tr>
+      <th scope="col">Transaction Id</th>
+      <th scope="col">Date and Time</th>
+      <th scope="col">Credit</th>
+      <th scope="col">Debit</th>
+      <th scope="col">Balance</th>
+      <th scope="col">Id</th>
+      <th scope="col">Remarks</th>
+      
+      
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor ="let transaction of transactions | transactionSearch: searchValue: searchBy">
+      <td>{{transaction.transactionId}}</td>
+      <td>{{transaction.date | date: 'medium'}}</td>
+      <td style="color:green;">+{{transaction.credit}}</td>
+      <td style="color:red;">-{{transaction.debit}}</td>
+      <td>{{transaction.balance}}</td>
+      <td>{{transaction.id}}</td>
+      <td>{{transaction.remarks}}</td>
+    </tr>
+  </tbody>
+</table>
+<mat-paginator [length]="totalItems"
+              [pageSize]="itemsPerPage"
+              [pageSizeOptions]="[1, 2, 3, 4, 5, 10, 25,50, 100]"
+              (page)="getNextPageItems($event)" >
+</mat-paginator>
+
